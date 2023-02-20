@@ -6,6 +6,8 @@ const ageInput = document.getElementById('age');
 const addressInput = document.getElementById('address');
 const phoneNumberInput = document.getElementById('phone-number');
 const constituencyInput = document.getElementById('constituency');
+form.addEventListener("submit", submitForm);
+
 
 // Define the function to validate the form fields
 function validateForm() {
