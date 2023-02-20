@@ -44,13 +44,15 @@ function validateForm() {
     alert('Please enter a valid constituency');
     return false;
   }
+  }
+  
 
  function submitForm(event) {
   event.preventDefault();
 
   // Get the form values
   const name = document.getElementById("name").value;
-  const fatherName = document.getElementById("father-name").value;
+  const fatherName = document.getElementById("father-husband-name").value;
   const age = document.getElementById("age").value;
   const address = document.getElementById("address").value;
   const phone = document.getElementById("phone").value;
@@ -58,16 +60,16 @@ function validateForm() {
 
   // Call the Azure function app endpoint
   const url =
-    "https://<function-app-name>.azurewebsites.net/api/<function-name>?code=<function-key>";
+    "https://uploaddetails.azurewebsites.net/api/upload?code=v2NQvHGKkdkmK0oAf2D6nl8pPPGMRS-78chqVuhZFJY4AzFuR20fIw==";
   fetch(url, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({
       name,
-      fatherName,
+      fatherHusbandName,
       age,
       address,
-      phone,
+      phoneNumber,
       constituency,
     }),
   })
