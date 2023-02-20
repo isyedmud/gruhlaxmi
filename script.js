@@ -6,6 +6,43 @@ const ageInput = document.getElementById('age');
 const addressInput = document.getElementById('address');
 const phoneNumberInput = document.getElementById('phone-number');
 const constituencyInput = document.getElementById('constituency');
+
+function submitForm(event) {
+  event.preventDefault();
+
+  // Get the form values
+  const name = document.getElementById("name").value;
+  const fatherName = document.getElementById("father-husband-name").value;
+  const age = document.getElementById("age").value;
+  const address = document.getElementById("address").value;
+  const phone = document.getElementById("phone").value;
+  const constituency = document.getElementById("constituency").value;
+
+  // Call the Azure function app endpoint
+  const url =
+    "https://uploaddetails.azurewebsites.net/api/upload?code=v2NQvHGKkdkmK0oAf2D6nl8pPPGMRS-78chqVuhZFJY4AzFuR20fIw==";
+  fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name,
+      fatherHusbandName,
+      age,
+      address,
+      phoneNumber,
+      constituency,
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      alert("Form submitted successfully!");
+    })
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation
+                    }");
+
 form.addEventListener("submit", submitForm);
 
 
@@ -48,39 +85,3 @@ function validateForm() {
   }
   }
   
-
- function submitForm(event) {
-  event.preventDefault();
-
-  // Get the form values
-  const name = document.getElementById("name").value;
-  const fatherName = document.getElementById("father-husband-name").value;
-  const age = document.getElementById("age").value;
-  const address = document.getElementById("address").value;
-  const phone = document.getElementById("phone").value;
-  const constituency = document.getElementById("constituency").value;
-
-  // Call the Azure function app endpoint
-  const url =
-    "https://uploaddetails.azurewebsites.net/api/upload?code=v2NQvHGKkdkmK0oAf2D6nl8pPPGMRS-78chqVuhZFJY4AzFuR20fIw==";
-  fetch(url, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({
-      name,
-      fatherHusbandName,
-      age,
-      address,
-      phoneNumber,
-      constituency,
-    }),
-  })
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Network response was not ok");
-      }
-      alert("Form submitted successfully!");
-    })
-    .catch((error) => {
-      console.error("There was a problem with the fetch operation
-                    }");
