@@ -59,12 +59,12 @@ function validateForm() {
     }
   };
   const data = JSON.stringify({
-    name: nameInput.value,
-    fatherHusbandName: fatherHusbandNameInput.value,
-    age: ageInput.value,
-    address: addressInput.value,
-    phoneNumber: phoneNumberInput.value,
-    constituency: constituencyInput.value
+    Name: nameInput.value,
+    FatherOrHusbandName: fatherHusbandNameInput.value,
+    Age: ageInput.value,
+    Address: addressInput.value,
+    PhoneNumber: phoneNumberInput.value,
+    Constituency: constituencyInput.value
   });
   xhr.send(data);
   return false;
