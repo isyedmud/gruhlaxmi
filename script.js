@@ -45,27 +45,38 @@ function validateForm() {
     return false;
   }
 
-  // If all fields are valid, submit the form to the function app
-  const url = 'https://uploaddetails.azurewebsites.net/api/upload?code=v2NQvHGKkdkmK0oAf2D6nl8pPPGMRS-78chqVuhZFJY4AzFuR20fIw==';
-  const xhr = new XMLHttpRequest();
-  xhr.open('POST', url, true);
-  xhr.setRequestHeader('Content-Type', 'application/json');
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4 && xhr.status === 200) {
-      alert('Form submitted successfully');
-      form.reset();
-    } else if (xhr.readyState === 4 && xhr.status !== 200) {
-      alert('Error submitting form. Please try again later.');
-    }
-  };
-  const data = JSON.stringify({
-    Name: nameInput.value,
-    FatherOrHusbandName: fatherHusbandNameInput.value,
-    Age: ageInput.value,
-    Address: addressInput.value,
-    PhoneNumber: phoneNumberInput.value,
-    Constituency: constituencyInput.value
-  });
-  xhr.send(data);
-  return false;
-}
+ function submitForm(event) {
+  event.preventDefault();
+
+  // Get the form values
+  const name = document.getElementById("name").value;
+  const fatherName = document.getElementById("father-name").value;
+  const age = document.getElementById("age").value;
+  const address = document.getElementById("address").value;
+  const phone = document.getElementById("phone").value;
+  const constituency = document.getElementById("constituency").value;
+
+  // Call the Azure function app endpoint
+  const url =
+    "https://<function-app-name>.azurewebsites.net/api/<function-name>?code=<function-key>";
+  fetch(url, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({
+      name,
+      fatherName,
+      age,
+      address,
+      phone,
+      constituency,
+    }),
+  })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error("Network response was not ok");
+      }
+      alert("Form submitted successfully!");
+    })
+    .catch((error) => {
+      console.error("There was a problem with the fetch operation
+                    }");
