@@ -35,14 +35,14 @@ function validateForm() {
 
   // Submit form values to Azure Function App
   var data = {
-    name: name,
-    fatherHusbandName: fatherHusbandName,
-    age: age,
-    address: address,
-    phoneNumber: phoneNumber,
-    constituency: constituency
+    Name: name,
+    FatherorHusbandName: fatherHusbandName,
+    Age: age,
+    Address: address,
+    PhoneNumber: phoneNumber,
+    Constituency: constituency
   };
-  var apiUrl = "https://uploaddetails.azurewebsites.net/api/upload?code=v2NQvHGKkdkmK0oAf2D6nl8pPPGMRS-78chqVuhZFJY4AzFuR20fIw==";
+  var apiUrl = "https://uploaddetails.azurewebsites.net/api/UploadData";
   fetch(apiUrl, {
     method: "POST",
     body: JSON.stringify(data)
