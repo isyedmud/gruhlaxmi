@@ -45,7 +45,15 @@ function validateForm() {
   var apiUrl = "https://uploaddetails.azurewebsites.net/api/UploadData";
   fetch(apiUrl, {
     method: "POST",
-    body: JSON.stringify(data)
+  body:  {
+          Name :$name,
+          FatherorHusbandName: $fatherHusbandName,
+    Age: $age,
+    Address: $address,
+    PhoneNumber: $phoneNumber,
+    Constituency: $constituency
+          
+         }
   })
   .then(response => {
     if (response.ok) {
