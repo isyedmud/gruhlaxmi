@@ -51,12 +51,15 @@ function validateForm() {
   }
   })
   .then(response => {
-    if (response.ok) {
-      alert("Form submitted successfully.");
+  if (response.ok) {
+  response.text().then(function (text) {
+    alert("Registration Successfull: " + text);
       document.getElementById("registration-form").reset();
-    } else {
-      alert("Failed to submit form. Please try again later.");
-    }
+  });
+} else {
+  alert("Error submitting form. Please try again later.");
+}
+
   })
   .catch(error => {
     alert("Failed to submit form. Please try again later.");
