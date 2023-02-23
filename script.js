@@ -34,9 +34,9 @@ function validateForm() {
   }
 
   // Show loading symbol
-  var submitButton = document.getElementById("submit-button");
+  var submitButton = document.getElementById("submitButton");
   var loadingSymbol = document.createElement("img");
-  loadingSymbol.setAttribute("src", "loading.gif");
+  loadingSymbol.setAttribute("src", "Loading.gif");
   loadingSymbol.setAttribute("alt", "Loading...");
   submitButton.parentNode.insertBefore(loadingSymbol, submitButton.nextSibling);
   submitButton.style.display = "none";
