@@ -33,6 +33,14 @@ function validateForm() {
     return false;
   }
 
+  // Show loading symbol
+  var submitButton = document.getElementById("submit-button");
+  var loadingSymbol = document.createElement("img");
+  loadingSymbol.setAttribute("src", "loading.gif");
+  loadingSymbol.setAttribute("alt", "Loading...");
+  submitButton.parentNode.insertBefore(loadingSymbol, submitButton.nextSibling);
+  submitButton.style.display = "none";
+
   // Submit form values to Azure Function App
   var data = {
     Name: name,
@@ -45,26 +53,37 @@ function validateForm() {
   var apiUrl = "https://uploaddetails.azurewebsites.net/api/UploadData";
   fetch(apiUrl, {
     method: "POST",
-  body: JSON.stringify(data),
-  headers: {
-    "Content-Type": "application/json"
-  }
+    body: JSON.stringify(data),
+    headers: {
+      "Content-Type": "application/json"
+    }
   })
-  .then(response => {
-  if (response.ok) {
-  response.text().then(function (text) {
-    alert("Registration Successfull: " + text);
-      document.getElementById("registration-form").reset();
-  });
-} else {
-  alert("Error submitting form. Please try again later.");
-}
-
-  })
-  .catch(error => {
-    alert("Failed to submit form. Please try again later.");
-  });
+    .then(response => {
+      if (response.ok) {
+        response.text().then(function (text) {
+          // Hide loading symbol and show success message
+          loadingSymbol.style.display = "none";
+          submitButton.style.display = "block";
+          alert("Registration Successful: " + text);
+          document.getElementById("registration-form").reset();
+        });
+      } else {
+        // Hide loading symbol and show error message
+        loadingSymbol.style.display = "none";
+        submitButton.style.display = "block";
+        alert("Error submitting form. Please try again later.");
+      }
+    })
+    .catch(error => {
+      // Hide loading symbol and show error message
+      loadingSymbol.style.display = "none";
+      submitButton.style.display = "block";
+      alert("Failed to submit form. Please try again later.");
+    });
 
   // Prevent form from submitting normally
   return false;
 }
+
+
+
